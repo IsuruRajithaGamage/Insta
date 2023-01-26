@@ -15,6 +15,15 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
 import Input from "./Input";
 import Icon from "./icon";
+import { signin, signup } from "../../actions/auth";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
   const classes = useStyles();
@@ -22,6 +31,7 @@ const Auth = () => {
   const [isSignUp, setIsSingUp] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [formData, setFormData] = useState(initialState);
 
   useEffect(() => {
     function start() {
@@ -36,15 +46,27 @@ const Auth = () => {
 
   const handleShowPassword = () => setshowPassword(!showPassword);
 
-  const handleSubmit = () => {};
+  //manual sign up & sign in
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleChange = () => {};
+    if (isSignUp) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const switchMode = () => {
     setIsSingUp((prevIsSignup) => !prevIsSignup);
     handleShowPassword(false);
   };
 
+  //google auth
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
