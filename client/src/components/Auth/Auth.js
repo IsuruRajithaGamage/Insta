@@ -49,7 +49,7 @@ const Auth = () => {
   //manual sign up & sign in
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(formData);
     if (isSignUp) {
       dispatch(signup(formData, history));
     } else {
@@ -63,7 +63,7 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSingUp((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
+    setshowPassword(false);
   };
 
   //google auth

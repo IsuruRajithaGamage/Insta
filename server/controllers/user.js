@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import Jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 import User from "../models/user.js";
 
@@ -10,7 +10,7 @@ export const signin = async (req, res) => {
     const existUser = await User.findOne({ email });
 
     if (!existUser)
-      return res.status(400).json({ message: "User dosen't exist!" });
+      return res.status(404).json({ message: "User dosen't exist!" });
 
     const isPasswordCurrect = await bcrypt.compare(
       password,
@@ -26,9 +26,10 @@ export const signin = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.starus(200).json({ result: existUser, token });
+    res.status(200).json({ result: existUser, token });
   } catch (error) {
     res.status(500).json({ message: "server error! please try again" });
+    console.log(error);
   }
 };
 
@@ -58,6 +59,7 @@ export const signup = async (req, res) => {
 
     res.status(200).json({ result, token });
   } catch (error) {
-    res.status(500).json({ message: "server error, plase try again!" });
+    console.log(error);
+    res.status(500).json({ message: "server error, plase try again!!!" });
   }
 };
