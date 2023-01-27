@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   Avatar,
   Button,
@@ -31,6 +32,7 @@ const Auth = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [formData, setFormData] = useState(initialState);
+  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
 
   useEffect(() => {
     function start() {
@@ -49,7 +51,7 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    if (isSignup) {
+    if (isSignup && isRecaptchaVerified) {
       dispatch(signup(formData, history));
     } else {
       dispatch(signin(formData, history));
@@ -80,6 +82,10 @@ const Auth = () => {
   const googlefailure = (error) => {
     console.log(error);
     console.log("Google sing in unsuccessfull, Please try again!");
+  };
+
+  const onChangehandle = (value) => {
+    setIsRecaptchaVerified(true);
   };
 
   return (
@@ -129,12 +135,19 @@ const Auth = () => {
                 type="password"
               />
             )}
+            {isSignup && (
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={onChangehandle}
+              /> //this is testing key of google recapcha
+            )}
           </Grid>
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
+            disabled={!isRecaptchaVerified && isSignup}
             className={classes.submit}
           >
             {isSignup ? "Sign Up" : "Sign In"}
