@@ -27,7 +27,7 @@ const initialState = {
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setshowPassword] = useState(false);
-  const [isSignUp, setIsSingUp] = useState(false);
+  const [isSignup, setIsSingUp] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const [formData, setFormData] = useState(initialState);
@@ -49,7 +49,7 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    if (isSignUp) {
+    if (isSignup) {
       dispatch(signup(formData, history));
     } else {
       dispatch(signin(formData, history));
@@ -61,7 +61,7 @@ const Auth = () => {
   };
 
   const switchMode = () => {
-    setIsSingUp((prevIsSignup) => !prevIsSignup);
+    setIsSingUp((previsSignup) => !previsSignup);
     setshowPassword(false);
   };
 
@@ -88,20 +88,21 @@ const Auth = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant="h5">{isSignUp ? "Sign Up" : "Sign In"}</Typography>
+        <Typography variant="h5">{isSignup ? "Sign Up" : "Sign In"}</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            {isSignUp && (
+            {isSignup && (
               <>
                 <Input
                   name="firstName"
-                  lable="first Name"
+                  label="First Name"
                   handleChange={handleChange}
+                  autoFocus
                   half
                 />
                 <Input
                   name="lastName"
-                  lable="Last Name"
+                  label="Last Name"
                   handleChange={handleChange}
                   half
                 />
@@ -109,7 +110,7 @@ const Auth = () => {
             )}
             <Input
               name="email"
-              lable="Email Address"
+              label="Email Address"
               handleChange={handleChange}
               type="email"
             />
@@ -120,7 +121,7 @@ const Auth = () => {
               type={showPassword ? "text" : "password"}
               handleShowPassword={handleShowPassword}
             />
-            {isSignUp && (
+            {isSignup && (
               <Input
                 name="confirmPassword"
                 label="Repeat Password"
@@ -136,7 +137,7 @@ const Auth = () => {
             color="primary"
             className={classes.submit}
           >
-            {isSignUp ? "Sign Up" : "Sign In"}
+            {isSignup ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
             clientId=""
@@ -159,13 +160,14 @@ const Auth = () => {
           <Grid container justify="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
-                {isSignUp
+                {isSignup
                   ? "Already have an account? Sign In"
                   : "Dont have an account? Sign up!"}
               </Button>
             </Grid>
           </Grid>
         </form>
+        <p>Name:Isuru Rajitha Gamage</p>
       </Paper>
     </Container>
   );
