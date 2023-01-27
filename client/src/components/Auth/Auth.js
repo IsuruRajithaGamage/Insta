@@ -16,7 +16,6 @@ import useStyles from "./styles";
 import Input from "./Input";
 import Icon from "./icon";
 import { signin, signup } from "../../actions/auth";
-
 const initialState = {
   firstName: "",
   lastName: "",
@@ -96,7 +95,7 @@ const Auth = () => {
               <>
                 <Input
                   name="firstName"
-                  lable="First Name"
+                  lable="first Name"
                   handleChange={handleChange}
                   half
                 />
