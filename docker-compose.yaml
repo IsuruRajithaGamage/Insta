@@ -6,7 +6,7 @@ services:
     ports: 
       - 3000:3000
   server:
-    build: npm run start
+    build: ./server
     command: npm run start
     ports: 
       - 5000:5000
