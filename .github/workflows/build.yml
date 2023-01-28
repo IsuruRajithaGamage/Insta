@@ -1,22 +1,24 @@
-name: Docker build
+name: Docker Compose
+
 on:
   push:
     branches:
       - main
+
 jobs:
   build:
-    runs-on: ubunu-latest
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Docker
-      uses: docker/setup-docker-action@v2
-      with:
-        version: latest
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v2
+        with:
+          version: latest
 
-    - name: Build and run app with Docker Compose
-      run: |
-        docker-compose build
-        docker-compose up
+      - name: Build and run app with Docker Compose
+        run: |
+          docker-compose build
+          docker-compose up
