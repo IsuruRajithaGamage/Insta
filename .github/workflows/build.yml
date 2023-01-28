@@ -4,7 +4,8 @@ on:
     branches:
       - main
 jobs:
-  runs-on: ubunu-latest
+  build:
+    runs-on: ubunu-latest
 
   steps:
     - name: Checkout code
