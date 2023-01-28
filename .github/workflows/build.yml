@@ -1,7 +1,8 @@
 name: Docker build
 on:
-  branches:
-    - main
+  push:
+    branches:
+      - main
 jobs:
   runs-on: ubunu-latest
 
