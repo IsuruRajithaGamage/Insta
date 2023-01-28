@@ -15,6 +15,10 @@ app.use(cors());
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
+app.get('/'(req,res)=>{
+  res.send('APP IS RUNNING');
+})
+
 const CONNECTION_URL =
   "mongodb+srv://isuruGamage:isuruGamage1234@cluster0.z0bll.mongodb.net/?retryWrites=true&w=majority";
 
